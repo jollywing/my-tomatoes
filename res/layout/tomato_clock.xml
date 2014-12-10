@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" >
+    <Button
+        android:id="@+id/clock_back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back_text"
+        android:layout_weight="1"
+        />
+    <TextView
+        android:id="@+id/clock_task_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Task title"
+        android:textSize="22sp"
+        />
+  </LinearLayout>
+  <TextView
+      android:id="@+id/clock_time"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="00:25:00"
+      android:textSize="60sp"
+      android:gravity="center"
+      android:layout_gravity="right"
+      />
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" >
+    <Button
+        android:id="@+id/clock_start_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_text"
+        android:layout_weight="1"
+        />
+    <Button
+        android:id="@+id/clock_abort_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_text"
+        android:layout_weight="1"
+        />
+  </LinearLayout>
+</LinearLayout>

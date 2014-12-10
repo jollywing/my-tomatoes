@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" >
+    <Button
+        android:id="@+id/new_cancel_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_text"
+        android:layout_weight="1"
+        android:onClick="onNewTaskCancel"
+        />
+    <Button
+        android:id="@+id/new_ok_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ok_text"
+        android:layout_weight="1"
+        android:onClick="onNewTaskOK"
+        />
+  </LinearLayout>
+  <EditText
+      android:id="@+id/new_task_edit"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:textSize="22sp"
+      android:maxLength="32"
+      android:hint="@string/new_task_hint_text"
+      />
+  <TextView
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/new_task_hint_text"
+      android:textSize="15sp"
+      />
+    
+</LinearLayout>
