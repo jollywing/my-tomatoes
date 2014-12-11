@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-  <LinearLayout
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal" >
-    <Button
-        android:id="@+id/clock_back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/back_text"
-        android:layout_weight="1"
-        />
-    <TextView
-        android:id="@+id/clock_task_title"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="Task title"
-        android:textSize="22sp"
-        />
-  </LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
   <TextView
       android:id="@+id/clock_time"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:text="00:25:00"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
       android:textSize="60sp"
       android:gravity="center"
-      android:layout_gravity="right"
+      />
+  <Button
+      android:id="@+id/clock_back_btn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_alignParentLeft="true"
+      android:text="@string/back_text"
+      android:onClick="onBackToList"
+      />
+  <TextView
+      android:id="@+id/clock_task_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_alignParentRight="true"
+      android:text="Task title"
+      android:textSize="22sp"
       />
   <LinearLayout
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
+      android:layout_below="@id/clock_time"
       android:orientation="horizontal" >
     <Button
         android:id="@+id/clock_start_btn"
@@ -42,6 +41,7 @@
         android:layout_height="wrap_content"
         android:text="@string/start_text"
         android:layout_weight="1"
+        android:onClick="onStartClock"
         />
     <Button
         android:id="@+id/clock_abort_btn"
@@ -49,6 +49,8 @@
         android:layout_height="wrap_content"
         android:text="@string/cancel_text"
         android:layout_weight="1"
+        android:enabled="false"
+        android:onClick="onCancelClock"
         />
   </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

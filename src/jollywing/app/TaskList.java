@@ -17,6 +17,10 @@ import android.content.Intent;
 
 public class TaskList extends Activity
 {
+    private final int NEW_TASK_REQUEST = 1;
+    private final int RANDOM_TOMATO_REQUEST = 2;
+    private final int TASK_TOMATO_REQUEST = 3;
+
     private ListView taskList;
     private ArrayList<HashMap<String, Object>> taskListData =
             new ArrayList<HashMap<String, Object>>();
@@ -41,7 +45,7 @@ public class TaskList extends Activity
                 public void onItemClick(AdapterView<?> parent,
                         View view, int position, long id){
                     Intent intent = new Intent(TaskList.this, TaskClock.class);
-                    startActivityForResult(intent, 0);
+                    startActivityForResult(intent, TASK_TOMATO_REQUEST);
                 }
             });
     }
@@ -58,20 +62,28 @@ public class TaskList extends Activity
 
     public void onNewTaskClick(View view){
         Intent intent = new Intent(this, NewTask.class);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, NEW_TASK_REQUEST);
+    }
+
+    public void onRandomTomatoClick(View view)
+    {
+        Intent intent = new Intent(TaskList.this, TaskClock.class);
+        startActivityForResult(intent, RANDOM_TOMATO_REQUEST);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent)
     {
         if (resultCode == RESULT_OK){
-            Bundle data = intent.getExtras();
-            String taskName = data.getString("new_task_name");
-            HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("taskName", taskName);
-            map.put("taskTomatoNum", 0);
-            taskListData.add(map);
-            taskAdapter.notifyDataSetChanged();
+            if(requestCode == NEW_TASK_REQUEST){
+                Bundle data = intent.getExtras();
+                String taskName = data.getString("new_task_name");
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("taskName", taskName);
+                map.put("taskTomatoNum", 0);
+                taskListData.add(map);
+                taskAdapter.notifyDataSetChanged();
+            }
         }
     }
 }
