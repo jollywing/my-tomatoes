@@ -33,7 +33,7 @@
   <LinearLayout
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:layout_below="@id/clock_time"
+      android:layout_alignParentBottom="true"
       android:orientation="horizontal" >
     <Button
         android:id="@+id/clock_start_btn"

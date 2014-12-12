@@ -8,16 +8,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class TaskClock extends Activity
 {
-    private final Timer timer = new Timer();
-    private TimerTask task;
     private final int TOMATO_INTERVAL = 25 * 60; // seconds
-    private int remainSeconds = TOMATO_INTERVAL;
+    private final Timer timer = new Timer();
     private TextView clockView;
     private Button startBtn, cancelBtn;
+    private Handler handler;
+    private TomatoTask task = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -26,11 +25,11 @@ public class TaskClock extends Activity
         setContentView(R.layout.tomato_clock);
 
         clockView = (TextView)findViewById(R.id.clock_time);
-        clockView.setText(formatTimeString(remainSeconds));
+        clockView.setText(formatTimeString(TOMATO_INTERVAL));
         startBtn = (Button)findViewById(R.id.clock_start_btn);
         cancelBtn = (Button)findViewById(R.id.clock_abort_btn);
 
-        final Handler handler = new Handler(){
+        handler = new Handler(){
                 @Override
                 public void handleMessage(Message msg){
                     super.handleMessage(msg);
@@ -41,23 +40,15 @@ public class TaskClock extends Activity
                 }
             };
 
-        task = new TimerTask(){
-
-                @Override
-                public void run(){
-                    remainSeconds--;
-                    Message message = new Message();
-                    message.what = remainSeconds;
-                    handler.sendMessage(message);
-                }
-            };
     }
 
     public void onCancelClock(View view)
     {
-        task.cancel();
-        remainSeconds = TOMATO_INTERVAL;
-        clockView.setText(formatTimeString(remainSeconds));
+        if(task != null){
+            task.cancel();
+            task = null;
+        }
+        clockView.setText(formatTimeString(TOMATO_INTERVAL));
         cancelBtn.setEnabled(false);
         startBtn.setEnabled(true);
     }
@@ -65,8 +56,7 @@ public class TaskClock extends Activity
     public void onStartClock(View view)
     {
         // new Thread
-        // remainSeconds = TOMATO_INTERVAL;
-        // timer = new Timer();
+        task = new TomatoTask(TOMATO_INTERVAL, handler);
         timer.schedule(task, 1000, 1000);
         // disable button
         startBtn.setEnabled(false);
@@ -76,6 +66,10 @@ public class TaskClock extends Activity
 
     public void onBackToList(View view)
     {
+        if(task != null){
+            task.cancel();
+            task = null;
+        }
         setResult(RESULT_CANCELED);
         finish();
     }
