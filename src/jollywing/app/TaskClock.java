@@ -1,5 +1,6 @@
 package jollywing.app;
 
+import android.content.Intent;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;
@@ -7,16 +8,20 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
+import android.media.SoundPool;
+import android.media.AudioManager;
 import java.util.Timer;
 
 public class TaskClock extends Activity
 {
-    private final int TOMATO_INTERVAL = 25 * 60; // seconds
+    private final int TOMATO_INTERVAL = 10; // seconds
     private final Timer timer = new Timer();
-    private TextView clockView;
+    private TextView clockView, clockTitle;
     private Button startBtn, cancelBtn;
     private Handler handler;
     private TomatoTask task = null;
+    private SoundPool sndPool;
+    private int alarmSndId;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -28,6 +33,14 @@ public class TaskClock extends Activity
         clockView.setText(formatTimeString(TOMATO_INTERVAL));
         startBtn = (Button)findViewById(R.id.clock_start_btn);
         cancelBtn = (Button)findViewById(R.id.clock_abort_btn);
+        clockTitle = (TextView)findViewById(R.id.clock_task_title);
+
+        Intent intent = getIntent();
+        Bundle data = intent.getExtras();
+        clockTitle.setText(data.getString("task_name"));
+
+        // sndPool = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);
+        // alarmSndId = sndPool.load(this, R.raw.alert, 1);
 
         handler = new Handler(){
                 @Override
@@ -36,6 +49,13 @@ public class TaskClock extends Activity
                     String timeStr = formatTimeString(msg.what);
                     clockView.setText(timeStr);
                     if(msg.what == 0){
+                        // sndPool.play(alarmSndId, 1, 1, 0, 0, 1);
+                        task.cancel();
+                        task = null;
+                        // If you want to read bundle from intent in `onActivityResult`,
+                        // setResult must use getIntent().
+                        setResult(RESULT_OK, getIntent());
+                        TaskClock.this.finish();
                     }
                 }
             };

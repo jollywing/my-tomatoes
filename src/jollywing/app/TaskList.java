@@ -45,6 +45,11 @@ public class TaskList extends Activity
                 public void onItemClick(AdapterView<?> parent,
                         View view, int position, long id){
                     Intent intent = new Intent(TaskList.this, TaskClock.class);
+                    Bundle data = new Bundle();
+                    data.putInt("task_id", position);
+                    HashMap<String, Object> map = taskListData.get(position);
+                    data.putString("task_name", (String)map.get("taskName"));
+                    intent.putExtras(data);
                     startActivityForResult(intent, TASK_TOMATO_REQUEST);
                 }
             });
@@ -68,6 +73,9 @@ public class TaskList extends Activity
     public void onRandomTomatoClick(View view)
     {
         Intent intent = new Intent(TaskList.this, TaskClock.class);
+        Bundle data = new Bundle();
+        data.putString("task_name", getResources().getString(R.string.random_tomato_text));
+        intent.putExtras(data);
         startActivityForResult(intent, RANDOM_TOMATO_REQUEST);
     }
 
@@ -82,6 +90,14 @@ public class TaskList extends Activity
                 map.put("taskName", taskName);
                 map.put("taskTomatoNum", 0);
                 taskListData.add(map);
+                taskAdapter.notifyDataSetChanged();
+            }
+            else if(requestCode == TASK_TOMATO_REQUEST){
+                Bundle data = intent.getExtras();
+                int taskId = data.getInt("task_id");
+                Log.i("MyTomatoes", "" + taskId);
+                HashMap<String, Object> map = taskListData.get(taskId);
+                map.put("taskTomatoNum", ((Integer)map.get("taskTomatoNum")).intValue() + 1);
                 taskAdapter.notifyDataSetChanged();
             }
         }
