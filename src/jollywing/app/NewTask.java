@@ -21,7 +21,6 @@ public class NewTask extends Activity
         setContentView(R.layout.new_task);
         taskNameEdit = (EditText)findViewById(R.id.new_task_edit);
         newTaskHint = (TextView)findViewById(R.id.new_task_hint);
-        Toast.makeText(this, taskNameEdit.getText().toString(), Toast.LENGTH_LONG);
         Log.i(LOG_TAG, taskNameEdit.getText().toString());
     }
 

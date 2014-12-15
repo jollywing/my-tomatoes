@@ -39,8 +39,8 @@ public class TaskClock extends Activity
         Bundle data = intent.getExtras();
         clockTitle.setText(data.getString("task_name"));
 
-        // sndPool = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);
-        // alarmSndId = sndPool.load(this, R.raw.alert, 1);
+        sndPool = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);
+        alarmSndId = sndPool.load(this, R.raw.alert, 1);
 
         handler = new Handler(){
                 @Override
@@ -49,7 +49,7 @@ public class TaskClock extends Activity
                     String timeStr = formatTimeString(msg.what);
                     clockView.setText(timeStr);
                     if(msg.what == 0){
-                        // sndPool.play(alarmSndId, 1, 1, 0, 0, 1);
+                        sndPool.play(alarmSndId, 1, 1, 0, 0, 1);
                         task.cancel();
                         task = null;
                         // If you want to read bundle from intent in `onActivityResult`,
