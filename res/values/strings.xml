@@ -15,4 +15,5 @@
     <string name="back_text">返回</string>
     <string name="new_task_hint_text">输入新的任务名称</string>
     <string name="new_task_warning">任务名称不能为空！</string>
+    <string name="repeat_task_error">新建任务和已有任务重名！</string>
 </resources>

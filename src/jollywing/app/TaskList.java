@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.SimpleAdapter;
 import android.widget.AdapterView;
@@ -181,6 +182,16 @@ public class TaskList extends Activity
         startActivityForResult(intent, RANDOM_TOMATO_REQUEST);
     }
 
+    private boolean taskInList(String name)
+    {
+        for(HashMap<String, Object> taskMap : taskListData){
+            String taskName = (String)taskMap.get("taskName");
+            if (taskName.equals(name))
+                return true;
+        }
+        return false;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent)
     {
@@ -188,12 +199,18 @@ public class TaskList extends Activity
             if(requestCode == NEW_TASK_REQUEST){
                 Bundle data = intent.getExtras();
                 String taskName = data.getString("new_task_name");
-                HashMap<String, Object> map = new HashMap<String, Object>();
-                map.put("taskName", taskName);
-                map.put("taskTomatoNum", 0);
-                taskListData.add(map);
-                taskAdapter.notifyDataSetChanged();
-                saveTaskData();
+                if(taskInList(taskName)){
+                    Toast.makeText(this, getResources().getString(R.string.repeat_task_error), Toast.LENGTH_LONG);
+                    return;
+                }
+                else {
+                    HashMap<String, Object> map = new HashMap<String, Object>();
+                    map.put("taskName", taskName);
+                    map.put("taskTomatoNum", 0);
+                    taskListData.add(map);
+                    taskAdapter.notifyDataSetChanged();
+                    saveTaskData();
+                }
             }
             else if(requestCode == TASK_TOMATO_REQUEST){
                 Bundle data = intent.getExtras();
