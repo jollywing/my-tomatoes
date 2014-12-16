@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.media.SoundPool;
 import android.media.AudioManager;
 import java.util.Timer;
@@ -17,7 +18,7 @@ public class TaskClock extends Activity
     private final int TOMATO_INTERVAL = 10; // seconds
     private final Timer timer = new Timer();
     private TextView clockView, clockTitle;
-    private Button startBtn, cancelBtn;
+    private ImageButton startBtn, cancelBtn;
     private Handler handler;
     private TomatoTask task = null;
     private SoundPool sndPool;
@@ -31,8 +32,8 @@ public class TaskClock extends Activity
 
         clockView = (TextView)findViewById(R.id.clock_time);
         clockView.setText(formatTimeString(TOMATO_INTERVAL));
-        startBtn = (Button)findViewById(R.id.clock_start_btn);
-        cancelBtn = (Button)findViewById(R.id.clock_abort_btn);
+        startBtn = (ImageButton)findViewById(R.id.clock_start_btn);
+        cancelBtn = (ImageButton)findViewById(R.id.clock_abort_btn);
         clockTitle = (TextView)findViewById(R.id.clock_task_title);
 
         Intent intent = getIntent();

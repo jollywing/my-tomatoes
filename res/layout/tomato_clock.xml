@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
+                android:background="#ddeeff"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
   <TextView
@@ -12,13 +13,13 @@
       android:textSize="60sp"
       android:gravity="center"
       />
-  <Button
+  <ImageButton
       android:id="@+id/clock_back_btn"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentTop="true"
       android:layout_alignParentLeft="true"
-      android:text="@string/back_text"
+      android:src="@drawable/back"
       android:onClick="onBackToList"
       />
   <TextView
@@ -35,19 +36,19 @@
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
       android:orientation="horizontal" >
-    <Button
+    <ImageButton
         android:id="@+id/clock_start_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/start_text"
+        android:src="@drawable/start"
         android:layout_weight="1"
         android:onClick="onStartClock"
         />
-    <Button
+    <ImageButton
         android:id="@+id/clock_abort_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cancel_text"
+        android:src="@drawable/cancel"
         android:layout_weight="1"
         android:enabled="false"
         android:onClick="onCancelClock"

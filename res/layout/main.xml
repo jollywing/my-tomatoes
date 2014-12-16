@@ -4,35 +4,38 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="#EEFFDD"
               tools:context=".MainActivity" >
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal" >
-    <Button
+    <ImageButton
         android:id="@+id/setup_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/setup_btn_text"
         android:layout_weight="1"
-        android:enabled="false"
+        android:src="@drawable/setup"
+        android:clickable="true"
         />
-    <Button
+    <ImageButton
         android:id="@+id/new_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/new_btn_text"
+        android:clickable="true"
+        android:src="@drawable/new_task_button"
         android:layout_weight="1"
         android:onClick="onNewTaskClick"
         />
-    <Button
+    <ImageButton
         android:id="@+id/random_tomato_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/random_tomato_text"
         android:layout_weight="1"
+        android:src="@drawable/tomato_clock"
         android:onClick="onRandomTomatoClick"
+        android:clickable="true"
         />
   </LinearLayout>
   <ListView
