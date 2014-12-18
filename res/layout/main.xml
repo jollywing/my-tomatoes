@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:src="@drawable/setup"
+        android:hint="@string/setup_btn_text"
         android:clickable="true"
         />
     <ImageButton
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:src="@drawable/new_task_button"
+        android:hint="@string/new_btn_text"
         android:layout_weight="1"
         android:onClick="onNewTaskClick"
         />
@@ -33,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:hint="@string/random_tomato_text"
         android:src="@drawable/tomato_clock"
         android:onClick="onRandomTomatoClick"
         android:clickable="true"
